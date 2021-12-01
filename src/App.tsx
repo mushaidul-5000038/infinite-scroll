@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import axios from "axios";
 import qs from 'qs';
 import { Search } from '@mui/icons-material';
+
 const StyledDiv = styled.div`
   display: flex;
   justify-content:space-around;
@@ -18,6 +19,11 @@ function App() {
   const [included, setIncluded] = useState([])
   const [excluded, setExcluded] = useState([])
   const [searched, setSearched] = useState([])
+  const [minRec, setMinRec] = useState(0)
+  const [maxRec, setMaxRec] = useState(0)
+  const [minSen, setMinSen] = useState(0)
+  const [maxSen, setMaxSen] = useState(0)
+
 
   const [token, setToken] = useState('')
 
@@ -28,6 +34,10 @@ function App() {
         tags: included,
         notTags: excluded,
         q: searched,
+        minMessagesSent: minSen,
+        minMessagesRecv: minRec,
+        maxMessagesSent: maxSen,
+        maxMessagesRecv: maxRec,
       },
       paramsSerializer: (params: any) => {
         return qs.stringify(params, { arrayFormat: "repeat" })
@@ -69,6 +79,10 @@ function App() {
         tags: included,
         notTags: excluded,
         q: searched,
+        minMessagesSent: minSen,
+        minMessagesRecv: minRec,
+        maxMessagesSent: maxSen,
+        maxMessagesRecv: maxRec,
       },
       paramsSerializer: (params: any) => {
         return qs.stringify(params, { arrayFormat: "repeat" })
@@ -92,12 +106,31 @@ function App() {
     if (token) {
       getAllContacts()
     }
-  }, [token, searched, excluded, included])
+  }, [token,
+    searched,
+    excluded,
+    included,
+    minRec,
+    maxRec,
+    minSen,
+    maxSen])
 
   return (
     <div className="App">
       <StyledDiv>
-        <LeftPanel token={token} setContacts={setContacts} setNextPage={setNextPage} getAllContacts={() => getAllContacts()} included={included} setIncluded={setIncluded} excluded={excluded} setExcluded={setExcluded} />
+        <LeftPanel token={token}
+          setContacts={setContacts}
+          setNextPage={setNextPage}
+          getAllContacts={() => getAllContacts()}
+          included={included}
+          setIncluded={setIncluded}
+          excluded={excluded}
+          setExcluded={setExcluded}
+          setMinRec={setMinRec}
+          setMaxRec={setMaxRec}
+          setMinSen={setMinSen}
+          setMaxSen={setMaxSen}
+        />
         <RightPanel contacts={contacts} nextPage={nextPage} fetchMoreData={fetchMoreData} setSearched={setSearched} />
       </StyledDiv>
 

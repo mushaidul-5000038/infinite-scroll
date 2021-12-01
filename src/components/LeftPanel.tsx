@@ -3,6 +3,7 @@ import ExcludeTag from './ExcludeTag';
 import IncludeTag from './IncludeTag';
 import axios from 'axios';
 import qs from 'qs';
+import { TextField } from '@mui/material';
 
 
 function LeftPanel(props: any) {
@@ -51,6 +52,51 @@ function LeftPanel(props: any) {
         <div>
             <IncludeTag token={props.token} setContacts={props.setContacts} setIncluded={props.setIncluded} />
             <ExcludeTag token={props.token} setExcluded={props.setExcluded} />
+
+            <div>
+                <h4>Message Received</h4>
+                <TextField
+                    id="outlined-number"
+                    label="Min"
+                    type="number"
+                    onChange={(e) => props.setMinRec(e.target.value)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+                <TextField
+                    id="outlined-number"
+                    label="Max"
+                    type="number"
+                    onChange={(e) => props.setMaxRec(e.target.value)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+            </div>
+
+            <div>
+                <h4>Message Sent</h4>
+                <TextField
+                    id="outlined-number"
+                    label="Min"
+                    type="number"
+                    onChange={(e) => props.setMinSen(e.target.value)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+                <TextField
+                    id="outlined-number"
+                    label="Max"
+                    type="number"
+                    onChange={(e) => props.setMaxSen(e.target.value)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+            </div>
+
 
 
         </div>

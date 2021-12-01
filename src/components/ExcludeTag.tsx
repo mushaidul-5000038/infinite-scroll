@@ -17,6 +17,7 @@ function ExcludeTag(props: any) {
     <div>
       <Autocomplete
         multiple
+        style={{ width: '200px' }}
         id="tags-standard"
         options={tags}
         getOptionLabel={(option) => option.title}
