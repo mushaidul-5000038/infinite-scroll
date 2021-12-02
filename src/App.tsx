@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import axios from "axios";
 import qs from 'qs';
 import { Search } from '@mui/icons-material';
-import { Container, Grid } from '@mui/material';
+import { Button, Container, Grid, IconButton, Modal, useMediaQuery } from '@mui/material';
 import { lightBlue } from '@mui/material/colors';
-
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 const StyledDiv = styled.div`
   display: flex;
   padding: 40px;
@@ -116,7 +116,10 @@ function App() {
     maxRec,
     minSen,
     maxSen])
-  //display={{ xs: "none", lg: "block" }}
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const matches = useMediaQuery('(min-width:900px)');
 
   return (
     <div className="App">
@@ -125,27 +128,52 @@ function App() {
         style={{ padding: '22px', overflow: 'hidden' }}
       >
         <Grid container spacing={2}>
-          <Grid item xs={8} md={6} lg={4}>
-            <LeftPanel token={token}
-              setContacts={setContacts}
-              setNextPage={setNextPage}
-              getAllContacts={() => getAllContacts()}
-              included={included}
-              setIncluded={setIncluded}
-              excluded={excluded}
-              setExcluded={setExcluded}
-              setMinRec={setMinRec}
-              setMaxRec={setMaxRec}
-              setMinSen={setMinSen}
-              setMaxSen={setMaxSen}
-            />
-          </Grid>
+          {matches &&
+            <Grid item xs={8} md={6} lg={4}>
+              <LeftPanel token={token}
+                setContacts={setContacts}
+                setNextPage={setNextPage}
+                getAllContacts={() => getAllContacts()}
+                included={included}
+                setIncluded={setIncluded}
+                excluded={excluded}
+                setExcluded={setExcluded}
+                setMinRec={setMinRec}
+                setMaxRec={setMaxRec}
+                setMinSen={setMinSen}
+                setMaxSen={setMaxSen}
+              />
+            </Grid>}
 
-          <Grid item xs={4} md={6} lg={8}>
+          <Grid item xs={12} md={6} lg={8}>
+            {!matches && <IconButton onClick={handleOpen}><FilterAltIcon /></IconButton>}
             <RightPanel contacts={contacts} nextPage={nextPage} fetchMoreData={fetchMoreData} setSearched={setSearched} />
           </Grid>
 
         </Grid>
+
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          aria-describedby="modal-modal-description"
+        >
+          <LeftPanel token={token}
+            setContacts={setContacts}
+            setNextPage={setNextPage}
+            getAllContacts={() => getAllContacts()}
+            included={included}
+            setIncluded={setIncluded}
+            excluded={excluded}
+            setExcluded={setExcluded}
+            setMinRec={setMinRec}
+            setMaxRec={setMaxRec}
+            setMinSen={setMinSen}
+            setMaxSen={setMaxSen}
+          />
+
+        </Modal>
       </Container>
 
 
