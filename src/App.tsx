@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import LeftPanel from './components/LeftPanel';
 import RightPanel from './components/RightPanel';
-import styled from 'styled-components';
 import axios from "axios";
 import qs from 'qs';
-import { Search } from '@mui/icons-material';
 import { Button, Container, Grid, IconButton, Modal, useMediaQuery } from '@mui/material';
-import { lightBlue } from '@mui/material/colors';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-const StyledDiv = styled.div`
-  display: flex;
-  padding: 40px;
-`;
 
 
 
@@ -146,7 +139,9 @@ function App() {
             </Grid>}
 
           <Grid item xs={12} md={6} lg={8}>
-            {!matches && <IconButton onClick={handleOpen}><FilterAltIcon /></IconButton>}
+            {!matches && <IconButton onClick={handleOpen}>
+              <FilterAltIcon />
+            </IconButton>}
             <RightPanel contacts={contacts} nextPage={nextPage} fetchMoreData={fetchMoreData} setSearched={setSearched} />
           </Grid>
 
