@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import TextField from '@mui/material/TextField';
+import OneContact from './OneContact';
+import { Typography } from '@mui/material';
 
 
 function RightPanel(props: any) {
@@ -24,9 +26,11 @@ function RightPanel(props: any) {
     const optimisedVersion = useCallback(debounce(handleSearchInput), [])
 
     return (
-        <div>
+        <div style={{}}>
 
-            <TextField id="outlined-search" label="Search field" type="search" onChange={optimisedVersion} />
+            <TextField id="outlined-search" style={{ width: '80%' }}
+                label="Search Contacts"
+                type="search" onChange={optimisedVersion} />
 
 
             <InfiniteScroll
@@ -35,13 +39,13 @@ function RightPanel(props: any) {
                 hasMore={props.nextPage}
                 loader={<h4>Loading...</h4>}
                 endMessage={
-                    <p style={{ textAlign: 'center' }}>
-                        <b>Yay! You have seen it all</b>
-                    </p>
+                    <Typography style={{ textAlign: 'center', marginTop: '10px' }}>
+                        All Contacts Shown
+                    </Typography>
                 }
             >
                 {props.contacts.map((contact: any) =>
-                    <div key={contact.id}>{contact.name}</div>
+                    <OneContact key={contact.id} contact={contact} />
                 )}
 
             </InfiniteScroll>

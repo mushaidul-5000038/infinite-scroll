@@ -5,10 +5,12 @@ import styled from 'styled-components';
 import axios from "axios";
 import qs from 'qs';
 import { Search } from '@mui/icons-material';
+import { Container, Grid } from '@mui/material';
+import { lightBlue } from '@mui/material/colors';
 
 const StyledDiv = styled.div`
   display: flex;
-  justify-content:space-around;
+  padding: 40px;
 `;
 
 
@@ -114,25 +116,37 @@ function App() {
     maxRec,
     minSen,
     maxSen])
+  //display={{ xs: "none", lg: "block" }}
 
   return (
     <div className="App">
-      <StyledDiv>
-        <LeftPanel token={token}
-          setContacts={setContacts}
-          setNextPage={setNextPage}
-          getAllContacts={() => getAllContacts()}
-          included={included}
-          setIncluded={setIncluded}
-          excluded={excluded}
-          setExcluded={setExcluded}
-          setMinRec={setMinRec}
-          setMaxRec={setMaxRec}
-          setMinSen={setMinSen}
-          setMaxSen={setMaxSen}
-        />
-        <RightPanel contacts={contacts} nextPage={nextPage} fetchMoreData={fetchMoreData} setSearched={setSearched} />
-      </StyledDiv>
+      <Container
+        maxWidth='lg'
+        style={{ padding: '22px', overflow: 'hidden' }}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={8} md={6} lg={4}>
+            <LeftPanel token={token}
+              setContacts={setContacts}
+              setNextPage={setNextPage}
+              getAllContacts={() => getAllContacts()}
+              included={included}
+              setIncluded={setIncluded}
+              excluded={excluded}
+              setExcluded={setExcluded}
+              setMinRec={setMinRec}
+              setMaxRec={setMaxRec}
+              setMinSen={setMinSen}
+              setMaxSen={setMaxSen}
+            />
+          </Grid>
+
+          <Grid item xs={4} md={6} lg={8}>
+            <RightPanel contacts={contacts} nextPage={nextPage} fetchMoreData={fetchMoreData} setSearched={setSearched} />
+          </Grid>
+
+        </Grid>
+      </Container>
 
 
     </div>

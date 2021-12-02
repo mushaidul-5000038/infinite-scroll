@@ -3,8 +3,9 @@ import ExcludeTag from './ExcludeTag';
 import IncludeTag from './IncludeTag';
 import axios from 'axios';
 import qs from 'qs';
-import { TextField } from '@mui/material';
-
+import { Divider, TextField, Typography } from '@mui/material';
+import { indigo, cyan, lightBlue } from '@mui/material/colors';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 function LeftPanel(props: any) {
 
@@ -49,13 +50,25 @@ function LeftPanel(props: any) {
     // }, [props.included, props.excluded, props.token])
 
     return (
-        <div>
+        <div style={{
+            position: 'fixed',
+            boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+            padding: '10px',
+            backgroundColor: `${lightBlue[100]}`
+        }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <FilterAltIcon />
+                <Typography variant='subtitle1' style={{ fontSize: '2rem', fontWeight: '400' }}>Filters</Typography>
+            </div>
+
+            <Divider style={{ width: '200px' }} />
             <IncludeTag token={props.token} setContacts={props.setContacts} setIncluded={props.setIncluded} />
             <ExcludeTag token={props.token} setExcluded={props.setExcluded} />
 
-            <div>
-                <h4>Message Received</h4>
+            <div style={{ marginTop: '20px', marginBottom: '20px' }}>
+                <Typography style={{ marginBottom: '10px' }}>Message Received</Typography>
                 <TextField
+                    style={{ marginTop: '10px', marginRight: '10px', width: '150px' }}
                     id="outlined-number"
                     label="Min"
                     type="number"
@@ -65,6 +78,7 @@ function LeftPanel(props: any) {
                     }}
                 />
                 <TextField
+                    style={{ marginTop: '10px', width: '150px' }}
                     id="outlined-number"
                     label="Max"
                     type="number"
@@ -76,8 +90,9 @@ function LeftPanel(props: any) {
             </div>
 
             <div>
-                <h4>Message Sent</h4>
+                <Typography>Message Sent</Typography>
                 <TextField
+                    style={{ marginTop: '10px', marginRight: '10px', width: '150px' }}
                     id="outlined-number"
                     label="Min"
                     type="number"
@@ -87,6 +102,7 @@ function LeftPanel(props: any) {
                     }}
                 />
                 <TextField
+                    style={{ marginTop: '10px', width: '150px' }}
                     id="outlined-number"
                     label="Max"
                     type="number"
